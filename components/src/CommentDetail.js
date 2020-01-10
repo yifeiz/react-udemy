@@ -1,5 +1,7 @@
 import React from "react";
 
+// Slight aside; remember all component names MUST START WITH A CAPITAL LETTER
+// Otherwise, React will treat it as some regular html tag
 const CommentDetail = props => {
   console.log(props);
   return (
