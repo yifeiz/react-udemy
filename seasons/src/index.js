@@ -1,31 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import SeasonDisplay from "./SeasonDisplay";
+
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    // THIS IS THE ONLY TIME we do direct assignment to this.state (ALWAYS CALL SETSTATE)
-    this.state = { lat: null, errorMessage: "" };
+  //   // THIS IS THE ONLY TIME we do direct assignment to this.state (ALWAYS CALL SETSTATE)
+  //   this.state = { lat: null, errorMessage: "" };
+  // }
 
+  // below achieves the same as doing the whole constructor and stuff above
+  // (babel compiles below into similar code as above)
+  state = { lat: null, errorMessage: "" };
+
+  componentDidMount() {
+    console.log("My component was rendered to the screen");
     window.navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({ lat: position.coords.latitude });
-
-        // WE DID NOT DO THE FOLLOWING:
-        // this.state.lat = position.coords.latitude
-      },
-      err => {
-        this.setState({ errorMessage: err.message });
-      }
+      // WE DID NOT DO THE FOLLOWING:
+      // this.state.lat = position.coords.latitude
+      position => this.setState({ lat: position.coords.latitude }),
+      err => this.setState({ errorMessage: err.message })
     );
+  }
+
+  componentDidUpdate() {
+    console.log("My component was just updated - it re-rendered!");
   }
 
   render() {
     if (this.state.errorMessage && !this.state.lat) {
-      return <div> Error: {this.state.errorMessage} </div>;
+      return <SeasonDisplay err={this.state.errorMessage} />;
     } else if (!this.state.errorMessage && this.state.lat) {
-      return <div> Latitude: {this.state.lat} </div>;
+      return <SeasonDisplay lat={this.state.lat} />;
     } else {
       return <div> Loading! </div>;
     }
