@@ -10,10 +10,17 @@ const seasonConfig = {
   winter: {
     text: "It's hella cold",
     iconName: "snowflake"
+  },
+  error: {
+    text: "Cannot detect location",
+    iconName: "exclamation triangle"
   }
 };
 
-const getSeason = (lat, month) => {
+const getSeason = (lat, month, error) => {
+  if (error) {
+    return "error";
+  }
   if (month > 2 && month < 9) {
     return lat > 0 ? "summer" : "winter";
   } else {
@@ -22,7 +29,7 @@ const getSeason = (lat, month) => {
 };
 
 const SeasonDisplay = props => {
-  const season = getSeason(props.lat, new Date().getMonth());
+  const season = getSeason(props.lat, new Date().getMonth(), props.err);
   const { text, iconName } = seasonConfig[season];
 
   // Suggested to have classname for root div to be same as component name (for styling)
