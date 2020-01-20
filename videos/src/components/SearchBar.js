@@ -1,7 +1,7 @@
 import React from "react";
 
 class SearchBar extends React.Component {
-  state = { term: "jklj;k" };
+  state = { term: "cooperators" };
 
   onInputChange = event => {
     this.setState({
