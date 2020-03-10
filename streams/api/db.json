@@ -24,15 +24,20 @@
     },
     {
       "title": "Unexpected Behaviour",
-      "description": "What?",
-      "userId": "101639345354943967011",
+      "description": "What? jeez",
       "id": 5
     },
     {
       "title": "test stream",
-      "description": "test",
+      "description": "test patch request",
       "userId": "101639345354943967011",
       "id": 6
+    },
+    {
+      "title": "Component Reuse!",
+      "description": "Refactors today!",
+      "userId": "101639345354943967011",
+      "id": 7
     }
   ]
 }
