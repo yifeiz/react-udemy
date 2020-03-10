@@ -21,6 +21,18 @@
       "description": "created by me",
       "userId": "101639345354943967011",
       "id": 4
+    },
+    {
+      "title": "Unexpected Behaviour",
+      "description": "What?",
+      "userId": "101639345354943967011",
+      "id": 5
+    },
+    {
+      "title": "test stream",
+      "description": "test",
+      "userId": "101639345354943967011",
+      "id": 6
     }
   ]
 }
