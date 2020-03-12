@@ -11,6 +11,6 @@ Some projects based off of udemy react tutorial
 - songs
 - videos
 - blogs
-- streams (in progress)
+- streams (Finished! Most info found here)
 
 I will potentially keep working on some of these projects aftewards too, since some of them seem pretty cool and have some potential for extension (or not we'll see :) )
