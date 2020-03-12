@@ -1,49 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 
 import SeasonDisplay from "./SeasonDisplay";
 import Spinner from "./Spinner";
 
-class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
+const App = () => {
+  const [lat, setLat] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  //   // THIS IS THE ONLY TIME we do direct assignment to this.state (ALWAYS CALL SETSTATE)
-  //   this.state = { lat: null, errorMessage: "" };
-  // }
-
-  // below achieves the same as doing the whole constructor and stuff above
-  // (babel compiles below into similar code as above)
-  state = { lat: null, errorMessage: "" };
-
-  componentDidMount() {
-    console.log("My component was rendered to the screen");
+  useEffect(() => {
     window.navigator.geolocation.getCurrentPosition(
-      // WE DID NOT DO THE FOLLOWING:
-      // this.state.lat = position.coords.latitude
-      position => this.setState({ lat: position.coords.latitude }),
-      err => this.setState({ errorMessage: err.message })
+      position => setLat(position.coords.latitude),
+      err => setErrorMessage(err.message)
     );
+  }, []);
+
+  let content;
+
+  if (errorMessage) {
+    content = <div>Error: {errorMessage}</div>;
+  } else if (lat) {
+    content = <SeasonDisplay lat={lat} />;
+  } else {
+    content = <Spinner message="Please accept location request" />;
   }
 
-  componentDidUpdate() {
-    console.log("My component was just updated - it re-rendered!");
-  }
-
-  // moving logic from render function to helper func
-  renderContent() {
-    if (this.state.errorMessage && !this.state.lat) {
-      return <SeasonDisplay err={this.state.errorMessage} />;
-    } else if (!this.state.errorMessage && this.state.lat) {
-      return <SeasonDisplay lat={this.state.lat} />;
-    } else {
-      return <Spinner message="Please accept location request" />;
-    }
-  }
-
-  render() {
-    return <div className="border-red">{this.renderContent()}</div>;
-  }
-}
+  return <div className="border-red">{content}</div>;
+};
 
 ReactDOM.render(<App />, document.querySelector("#root"));
