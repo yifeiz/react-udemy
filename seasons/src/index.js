@@ -11,7 +11,11 @@ const App = () => {
   let content;
 
   if (errorMessage) {
-    content = <div>Error: {errorMessage}</div>;
+    content = (
+      <div>
+        <SeasonDisplay err={errorMessage} />
+      </div>
+    );
   } else if (lat) {
     content = <SeasonDisplay lat={lat} />;
   } else {
